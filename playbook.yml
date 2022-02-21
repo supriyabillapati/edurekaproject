@@ -1,0 +1,10 @@
+- hosts: webservers
+  become: true
+  become_user: ec2-user
+  tasks:
+  - name: install docker
+    yum: name=docker state=present
+  - name: start docker
+    service: name=docker state=started
+  - name: run the image to launch the container
+    command: docker run -itd -P devopsedu/webapp   
